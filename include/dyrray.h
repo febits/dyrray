@@ -3,9 +3,6 @@
 
 #include "types.h"
 
-#define INITIAL_CAPACITY 20
-#define RESIZE_VALUE(x) ((u64)((x) * 0.25))
-
 enum data_types {
   I8,
   U8,
@@ -15,8 +12,8 @@ enum data_types {
   U32,
   I64,
   U64,
-  FLOAT,
-  CHAR,
+  F32,
+  F64,
   CHAR_PTR,
   VOID_PTR
 };
@@ -30,6 +27,7 @@ typedef struct dyrray_t {
   object_t **items;
 
   const char *label;
+  u64 capacity;
   u64 csize;
 
   void (*show)(struct dyrray_t *);
@@ -38,9 +36,10 @@ typedef struct dyrray_t {
   object_t *(*delete)(struct dyrray_t *, u64);
   object_t *(*pop)(struct dyrray_t *);
   object_t *(*get)(struct dyrray_t *, u64);
+  void (*kill)(struct dyrray_t *);
 } dyrray_t;
 
-dyrray_t *dyrray_init(void);
+dyrray_t *dyrray_init(const char *label);
 
 object_t *dyrray_insert(dyrray_t *dr, void *data, enum data_types dt,
                         u64 index);
@@ -52,6 +51,8 @@ object_t *dyrray_delete(dyrray_t *dr, u64 index);
 object_t *dyrray_pop(dyrray_t *dr);
 
 object_t *dyrray_get(dyrray_t *dr, u64 index);
+
+void dyrray_kill(dyrray_t *dr);
 
 void dyrray_show(dyrray_t *dr);
 
