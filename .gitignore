@@ -2,6 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=c,vim
 
 dyrray
+benchmark/insert
+benchmark/append
 compile_commands.json
 .cache
 build

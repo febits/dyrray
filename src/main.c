@@ -11,6 +11,7 @@ int main(void) {
   dyrray_t *dr = dyrray_init("Dyrray");
   if (!dr) {
     perror("Dyrray init failed!\n");
+    return EXIT_FAILURE;
   }
 
   u64 _u64_ = ULONG_MAX;
