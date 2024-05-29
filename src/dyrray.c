@@ -6,22 +6,18 @@
 #include "dyrray.h"
 #include "types.h"
 
-#define EMPTY NULL
-#define DYRRAY_INITIAL_CAPACITY 5
-#define CHECK(e) ((e) == NULL ? true : false)
-#define REALLOC_FACTOR(x) ((u64)((x) * 0.5))
 
 enum shift_type { LEFT, RIGHT };
 
 dyrray_t *dyrray_init(const char *label) {
   dyrray_t *dr = malloc(sizeof(dyrray_t));
 
-  if (CHECK(dr))
+  if (dr == NULL)
     return NULL;
 
   dr->items = calloc(DYRRAY_INITIAL_CAPACITY, sizeof(object_t *));
 
-  if (CHECK(dr->items))
+  if (dr->items == NULL)
     return NULL;
 
   dr->label = label ? strdup(label) : NULL;
@@ -57,16 +53,16 @@ object_t *dyrray_insert(dyrray_t *dr, void *data, enum data_types dt,
     return dr->append(dr, data, dt);
   } else {
     if (dr->csize >= dr->capacity) {
-      dr->capacity += REALLOC_FACTOR(dr->capacity);
+      dr->capacity += DYRRAY_REALLOC_FACTOR(dr->capacity);
       dr->items = realloc(dr->items, dr->capacity * sizeof(object_t *));
 
-      if (CHECK(dr->items))
+      if (dr->items == NULL)
         return NULL;
     }
 
     object_t *obj = malloc(sizeof(object_t));
 
-    if (CHECK(obj) || index > dr->csize)
+    if (obj == NULL || index > dr->csize)
       return NULL;
 
     obj->dt = dt;
@@ -83,17 +79,17 @@ object_t *dyrray_insert(dyrray_t *dr, void *data, enum data_types dt,
 object_t *dyrray_append(dyrray_t *dr, void *data, enum data_types dt) {
   object_t *obj = malloc(sizeof(object_t));
 
-  if (CHECK(obj))
+  if (obj == NULL)
     return NULL;
 
   obj->dt = dt;
   obj->data = data;
 
   if (dr->csize >= dr->capacity) {
-    dr->capacity += REALLOC_FACTOR(dr->capacity);
+    dr->capacity += DYRRAY_REALLOC_FACTOR(dr->capacity);
     dr->items = realloc(dr->items, dr->capacity * sizeof(object_t *));
 
-    if (CHECK(dr->items))
+    if (dr->items == NULL)
       return NULL;
   }
 
@@ -110,7 +106,7 @@ object_t *dyrray_delete(dyrray_t *dr, u64 index) {
   } else {
     object_t *tmp = dr->items[index];
     _shift(dr, index + 1, dr->csize, LEFT);
-    dr->items[--dr->csize] = EMPTY;
+    dr->items[--dr->csize] = NULL;
 
     return tmp;
   }
@@ -121,7 +117,7 @@ object_t *dyrray_pop(dyrray_t *dr) {
     return NULL;
 
   object_t *tmp = dr->items[--dr->csize];
-  dr->items[dr->csize] = EMPTY;
+  dr->items[dr->csize] = NULL;
 
   return tmp;
 }

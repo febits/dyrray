@@ -3,6 +3,9 @@
 
 #include "types.h"
 
+#define DYRRAY_INITIAL_CAPACITY 5
+#define DYRRAY_REALLOC_FACTOR(x) ((u64)((x) * 0.5))
+
 enum data_types {
   I8,
   U8,
