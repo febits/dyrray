@@ -69,5 +69,6 @@ Another approach would be to implement using linked-list.
 
 ```bash
 make
-./dyrray
+cd build
+./dyrray-test
 ```
