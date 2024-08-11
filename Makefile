@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -pedantic -O3
+CFLAGS=-Wall -Wextra -pedantic -O3 -g
 CINCLUDE=-I./include/
 CFLAGS+=$(CINCLUDE)
 
