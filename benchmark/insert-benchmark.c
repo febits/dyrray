@@ -16,7 +16,7 @@ int main(void) {
   u32 _u32_ = UINT_MAX;
 
   for (int i = 0; i < 200000; i++) {
-    dr->insert(dr, &_u32_, VOID_PTR, dr->csize / 2);
+    dr->insert(dr, &_u32_, VOID_PTR, 0);
   }
 
   dr->kill(dr);

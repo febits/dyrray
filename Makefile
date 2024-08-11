@@ -1,17 +1,27 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -pedantic -g
+CFLAGS=-Wall -Wextra -pedantic -O3
 CINCLUDE=-I./include/
 CFLAGS+=$(CINCLUDE)
 
-SRC=$(wildcard src/*.c)
-BIN=dyrray
+BUILD_DIR=build
 
-.PHONY: default
-default: $(BIN)
+BENCH_SRC=$(wildcard benchmark/*.c)
+BENCH_BIN=$(patsubst %.c, $(BUILD_DIR)/%, $(BENCH_SRC))
+
+SRC=$(wildcard src/*.c)
+BIN=$(BUILD_DIR)/dyrray-test
+
+.PHONY: default clean always
+default: always $(BIN) $(BENCH_BIN)
 
 $(BIN): $(SRC)
 	$(CC) $(CFLAGS) $^ -o $@
 
-.PHONY: clean
+$(BUILD_DIR)/%: %.c
+	$(CC) $(CFLAGS) src/dyrray.c $< -o $(BUILD_DIR)/$(notdir $@)
+
+always:
+	mkdir -p $(BUILD_DIR)
+
 clean:
-	rm $(BIN)
+	rm -rf $(BUILD_DIR)
