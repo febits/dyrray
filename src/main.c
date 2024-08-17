@@ -68,9 +68,7 @@ int main(void) {
   dr->show(dr);
 
   printf("\nGet operation: \n");
-  object_t *obj_ptr = dr->get(dr, 9);
-  f64 *_f64_ = obj_ptr->data;
-  printf("%e\n", *_f64_);
+  printf("%e\n", DYRRAY_GETAS_VALUE(dr, 9, f64));
 
   dr->kill(dr);
   return EXIT_SUCCESS;
