@@ -1,7 +1,7 @@
+#include <float.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
-#include <float.h>
 #include <wchar.h>
 
 #include "dyrray.h"
@@ -23,14 +23,14 @@ int main(void) {
   i32 _i32_ = INT_MIN;
   i16 _i16_ = SHRT_MIN;
   i8 _i8_ = CHAR_MIN;
-  
+
   f32 _float_ = FLT_MAX;
   f64 _double_ = DBL_MAX;
 
   char *str = "Felipe";
   char *str2 = "Febits";
   object_t obj = {VOID_PTR, NULL};
-  
+
   dr->append(dr, &_u64_, U64);
   dr->append(dr, &_u32_, U32);
   dr->append(dr, &_u16_, U16);
@@ -52,11 +52,11 @@ int main(void) {
   dr->show(dr);
 
   printf("\nDeleting at 0 index:\n");
-  free(dr->delete(dr, 0));
+  free(dr->delete (dr, 0));
   dr->show(dr);
 
   printf("\nDeleting at 2 index: \n");
-  free(dr->delete(dr, 2));
+  free(dr->delete (dr, 2));
   dr->show(dr);
 
   printf("\nInserting at 0 index: \n");
