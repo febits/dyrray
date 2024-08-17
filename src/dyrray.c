@@ -140,54 +140,21 @@ void dyrray_show(dyrray_t *dr) {
 
   for (u64 i = 0; i < dr->csize; i++) {
     switch (dr->items[i]->dt) {
-      case CHAR_PTR: printf("\"%s\"", (char *)dr->items[i]->data); break;
-      case VOID_PTR: printf("%p", dr->items[i]->data); break;
-      case F32:
-        f32 *_f32_ = dr->items[i]->data;
-        printf("%e", *_f32_);
-        break;
-      case F64:
-        f64 *_f64_ = dr->items[i]->data;
-        printf("%e", *_f64_);
-        break;
-      case I8:
-        i8 *_i8_ = dr->items[i]->data;
-        printf("%d", *_i8_);
-        break;
-      case I16:
-        i16 *_i16_ = dr->items[i]->data;
-        printf("%d", *_i16_);
-        break;
-      case I32:
-        i32 *_i32_ = dr->items[i]->data;
-        printf("%d", *_i32_);
-        break;
-      case U8:
-        u8 *_u8_ = dr->items[i]->data;
-        printf("%u", *_u8_);
-        break;
-      case U16:
-        u16 *_u16_ = dr->items[i]->data;
-        printf("%u", *_u16_);
-        break;
-      case U32:
-        u32 *_u32_ = dr->items[i]->data;
-        printf("%u", *_u32_);
-        break;
-      case I64:
-        i64 *__int_ = dr->items[i]->data;
-        printf("%ld", *__int_);
-        break;
-      case U64:
-        u64 *__uint_ = dr->items[i]->data;
-        printf("%lu", *__uint_);
-        break;
+      case F32: printf("%e", DYRRAY_GETAS_VALUE(dr, i, f32)); break;
+      case F64: printf("%e", DYRRAY_GETAS_VALUE(dr, i, f64)); break;
+      case I8: printf("%d", DYRRAY_GETAS_VALUE(dr, i, i8)); break;
+      case I16: printf("%d", DYRRAY_GETAS_VALUE(dr, i, i16)); break;
+      case I32: printf("%d", DYRRAY_GETAS_VALUE(dr, i, i32)); break;
+      case U8: printf("%u", DYRRAY_GETAS_VALUE(dr, i, u8)); break;
+      case U16: printf("%u", DYRRAY_GETAS_VALUE(dr, i, u16)); break;
+      case U32: printf("%u", DYRRAY_GETAS_VALUE(dr, i, u32)); break;
+      case I64: printf("%ld", DYRRAY_GETAS_VALUE(dr, i, i64)); break;
+      case U64: printf("%lu", DYRRAY_GETAS_VALUE(dr, i, u64)); break;
+      case VOID_PTR: printf("%p", DYRRAY_GETAS_POINTER(dr, i, void *)); break;
+      case CHAR_PTR: printf("\"%s\"", DYRRAY_GETAS_POINTER(dr, i, char *)); break;
     }
     if (i != dr->csize - 1)
-      printf(","
-             " ");
+      printf(", ");
   }
-  printf("] (%lu)"
-         "\n",
-         dr->capacity);
+  printf("] (%lu)\n", dr->capacity);
 }
