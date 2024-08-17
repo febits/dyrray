@@ -6,7 +6,6 @@
 #include "dyrray.h"
 #include "types.h"
 
-
 enum shift_type { LEFT, RIGHT };
 
 dyrray_t *dyrray_init(const char *label) {
@@ -35,15 +34,13 @@ dyrray_t *dyrray_init(const char *label) {
   return dr;
 }
 
-static void _shift(dyrray_t *dr, u64 init, u64 end, enum shift_type st) {
+static inline void _shift(dyrray_t *dr, u64 init, u64 end, enum shift_type st) {
   if (st == LEFT) {
-    for (u64 i = init; i <= end; i++) {
-      dr->items[i - 1] = dr->items[i];
-    }
+    memmove(&dr->items[init - 1], &dr->items[init],
+            (end - init + 1) * sizeof(dr->items[0]));
   } else {
-    for (u64 i = end; i >= init && i < dr->capacity - 1; i--) {
-      dr->items[i + 1] = dr->items[i];
-    }
+    memmove(&dr->items[init + 1], &dr->items[init],
+            (end - init + 1) * sizeof(dr->items[0]));
   }
 }
 
