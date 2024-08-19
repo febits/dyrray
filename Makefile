@@ -11,7 +11,7 @@ BENCH_BIN=$(patsubst %.c, $(BUILD_DIR)/%, $(BENCH_SRC))
 SRC=$(wildcard src/*.c)
 BIN=$(BUILD_DIR)/dyrray-test
 
-.PHONY: default clean always
+.PHONY: default clean always bench
 default: always $(BIN) $(BENCH_BIN)
 
 $(BIN): $(SRC)
@@ -19,6 +19,9 @@ $(BIN): $(SRC)
 
 $(BUILD_DIR)/%: %.c
 	$(CC) $(CFLAGS) src/dyrray.c $< -o $(BUILD_DIR)/$(notdir $@)
+
+bench:
+	-./build/bench
 
 always:
 	mkdir -p $(BUILD_DIR)
