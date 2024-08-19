@@ -3,8 +3,8 @@
 
 #include "types.h"
 
-#define DYRRAY_INITIAL_CAPACITY 5
-#define DYRRAY_REALLOC_FACTOR(x) ((u64)((x) * 0.5))
+#define DYRRAY_INITIAL_CAPACITY 10
+#define DYRRAY_REALLOC_FACTOR(x) ((u64)((x) / 2))
 
 #define DYRRAY_GETAS_POINTER(dr, index, type)                                  \
   ((type)(dr)->get((dr), (index))->data)
