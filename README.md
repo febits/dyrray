@@ -67,8 +67,17 @@ Another approach would be to implement using linked-list.
 
 4Fun challange.
 
+## Compiling, testing and benchmarking
 ```bash
 make
-cd build
-./dyrray-test
+```
+
+Run tests (you'll need to install [cmocka lib](https://cmocka.org/index.html)):
+```bash
+make tests
+```
+
+Run benchmark:
+```bash
+make bench
 ```
