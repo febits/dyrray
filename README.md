@@ -81,3 +81,6 @@ Run benchmark:
 ```bash
 make bench
 ```
+
+## References
+- https://www.youtube.com/watch?v=5AllG-i_yto
