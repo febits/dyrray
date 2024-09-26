@@ -127,7 +127,7 @@ object_t *dyrray_get(dyrray_t *dr, u64 index) {
 }
 
 void dyrray_kill(dyrray_t *dr) {
-  for (u64 i = 0; i < dr->capacity; i++) {
+  for (size_t i = 0; i < dr->capacity; i++) {
     free(dr->items[i]);
   }
   free(dr->items);
@@ -138,7 +138,7 @@ void dyrray_kill(dyrray_t *dr) {
 void dyrray_show(dyrray_t *dr) {
   printf("%s:%lu [", dr->label ? dr->label : "---", dr->csize);
 
-  for (u64 i = 0; i < dr->csize; i++) {
+  for (size_t i = 0; i < dr->csize; i++) {
     switch (dr->items[i]->dt) {
       case F32: printf("%e", DYRRAY_GETAS_VALUE(dr, i, f32)); break;
       case F64: printf("%e", DYRRAY_GETAS_VALUE(dr, i, f64)); break;

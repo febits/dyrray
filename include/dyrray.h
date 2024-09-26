@@ -2,9 +2,10 @@
 #define DYRRAY_H
 
 #include "types.h"
+#include <stdlib.h>
 
 #define DYRRAY_INITIAL_CAPACITY 10
-#define DYRRAY_REALLOC_FACTOR(x) ((u64)((x) / 2))
+#define DYRRAY_REALLOC_FACTOR(x) ((size_t)((x) / 2))
 
 #define DYRRAY_GETAS_POINTER(dr, index, type)                                  \
   ((type)(dr)->get((dr), (index))->data)
@@ -35,8 +36,8 @@ typedef struct dyrray_t {
   object_t **items;
 
   const char *label;
-  u64 capacity;
-  u64 csize;
+  size_t capacity;
+  size_t csize;
 
   void (*show)(struct dyrray_t *);
   object_t *(*insert)(struct dyrray_t *, void *, enum data_types, u64);

@@ -43,8 +43,8 @@ typedef struct dyrray_t {
   object_t **items;
 
   const char *label;
-  u64 capacity;
-  u64 csize;   
+  size_t capacity;
+  size_t csize;   
 
   // Other fields
   ...
